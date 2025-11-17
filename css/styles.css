@@ -41,7 +41,9 @@ main {
 h2 {
     text-align: center;
 }
-
+#player_selector {
+    background-color: var(--color4);
+}
 #board {
     border: 5px solid var(--color3);
     border-radius: 5%;
