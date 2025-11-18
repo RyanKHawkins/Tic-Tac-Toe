@@ -19,7 +19,8 @@ let winner = "";
 let gameOver = false;
 function switchPlayer() {
     currPlayer = currPlayer == player1 ? player2 : player1;
-    messageDisplay.innerText = `Player:  ${currPlayer.symbol}`;
+    displayMessage(`Player:  ${currPlayer.symbol}`);
+}
 }
 
 function gameWon() {
@@ -112,15 +113,14 @@ function placeSymbol(cell) {
     }
     if (gameWon()) {
         winner = currPlayer;
-        console.log(`${currPlayer.name} won!`);
+        displayMessage(`${currPlayer.name} won!`)
         gameOver = true;
         messageDisplay.innerText = `${currPlayer.name} won!`;
         return
     }
     if (!gameWon() && isBoardFull()) {
         gameOver = true;
-        console.log("It was a draw");
-        messageDisplay.innerText = "It's a draw";
+        displayMessage("It's a draw");
         return
     }
     switchPlayer();
@@ -128,4 +128,9 @@ function placeSymbol(cell) {
 
 function isBoardFull() {
     return cells.every((cell) => cell.dataset.symbol);
+}
+
+function displayMessage(message) {
+    messageDisplay.innerText = message
+    console.log(message)
 }
