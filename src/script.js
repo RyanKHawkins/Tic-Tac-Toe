@@ -119,7 +119,6 @@ function placeSymbol(cell) {
         winner = currPlayer;
         displayMessage(`${currPlayer.name} won!`)
         gameOver = true;
-        messageDisplay.innerText = `${currPlayer.name} won!`;
         return
     }
     if (!gameWon() && isBoardFull()) {
