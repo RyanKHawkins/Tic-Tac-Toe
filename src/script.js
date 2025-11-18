@@ -30,7 +30,6 @@ function switchPlayer() {
     currPlayer = currPlayer == player1 ? player2 : player1;
     displayMessage(`Player:  ${currPlayer.symbol}`);
 }
-}
 
 function gameWon() {
     return isVerticalWin() || isHorizontalWin() || isDiagonalWin()
