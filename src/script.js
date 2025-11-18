@@ -12,6 +12,15 @@ opponentSelector.addEventListener("change", () => {
     newGame()
 })
 
+document.querySelector("#board").addEventListener("click", () => {
+    if (gameOver) {
+        startButton.classList.add("alert-button");
+        setTimeout(() => {
+            startButton.classList.remove("alert-button");
+        }, 500);
+    }
+})
+
 let player1 = { name: "Player 1", symbol: "X" };
 let player2 = { name: "Player 2", symbol: "O" };
 let currPlayer = player1;
@@ -67,17 +76,12 @@ function isDiagonalWin() {
     return false
 }
 
-for (i = 0; i < cells.length; i++) {
-    cells[i].addEventListener("click", (event) => {
+cells.forEach(cell => {
+    cell.addEventListener("click", (event) => {
         placeSymbol(event.target);
-        if (gameOver) {
-            startButton.classList.add("alert-button");
-            setTimeout(() => {
-                startButton.classList.remove("alert-button");
-            }, 500);
-        }
-    });
-}
+    })
+})
+
 
 function newGame() {
     if (winner) {
