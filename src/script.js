@@ -3,10 +3,23 @@ const message = document.getElementById("message");
 const startButton = document.querySelector("#start-button");
 startButton.addEventListener("click", newGame);
 const messageDisplay = document.querySelector("#message-display");
+const opponentSelector = document.querySelector("#player_selector")
 const h2 = document.querySelector("h2");
 h2.addEventListener("click", () => {
     return;
 });
+opponentSelector.addEventListener("change", () => {
+    newGame()
+})
+
+document.querySelector("#board").addEventListener("click", () => {
+    if (gameOver) {
+        startButton.classList.add("alert-button");
+        setTimeout(() => {
+            startButton.classList.remove("alert-button");
+        }, 500);
+    }
+})
 
 let player1 = { name: "Player 1", symbol: "X" };
 let player2 = { name: "Player 2", symbol: "O" };
@@ -15,7 +28,7 @@ let winner = "";
 let gameOver = false;
 function switchPlayer() {
     currPlayer = currPlayer == player1 ? player2 : player1;
-    messageDisplay.innerText = `Player:  ${currPlayer.symbol}`;
+    displayMessage(`Player:  ${currPlayer.symbol}`);
 }
 
 function gameWon() {
@@ -62,39 +75,35 @@ function isDiagonalWin() {
     return false
 }
 
-for (i = 0; i < cells.length; i++) {
-    cells[i].addEventListener("click", (event) => {
+cells.forEach(cell => {
+    cell.addEventListener("click", (event) => {
         placeSymbol(event.target);
-        if (gameOver) {
-            startButton.classList.add("alert-button");
-            setTimeout(() => {
-                startButton.classList.remove("alert-button");
-            }, 500);
-        }
-    });
-}
+    })
+})
+
 
 function newGame() {
     if (winner) {
         currPlayer = player1 == winner ? player2 : player1
     }
-    cells.forEach((cell) => {
-        cell.removeAttribute("data-symbol");
-        cell.innerText = "";
-        cell.classList = "cell";
-    });
+    resetCells();
     startButton.classList.remove("alert-button");
     messageDisplay.innerText = `Player:  ${currPlayer.symbol}`;
     gameOver = false;
     winner = "";
 }
 
+function resetCells() {
+    cells.forEach((cell) => {
+        cell.removeAttribute("data-symbol");
+        cell.innerText = "";
+        cell.classList = "cell";
+    });
+}
+
 function placeSymbol(cell) {
-    if (gameOver) {
-        return;
-    }
-    if (cell.dataset.symbol) {
-        return;
+    if (gameOver || cell.dataset.symbol) {
+        return
     }
     cell.dataset.symbol = currPlayer.symbol;
     cell.innerText = currPlayer.symbol;
@@ -107,15 +116,13 @@ function placeSymbol(cell) {
     }
     if (gameWon()) {
         winner = currPlayer;
-        console.log(`${currPlayer.name} won!`);
+        displayMessage(`${currPlayer.name} won!`)
         gameOver = true;
-        messageDisplay.innerText = `${currPlayer.name} won!`;
         return
     }
     if (!gameWon() && isBoardFull()) {
         gameOver = true;
-        console.log("It was a draw");
-        messageDisplay.innerText = "It's a draw";
+        displayMessage("It's a draw");
         return
     }
     switchPlayer();
@@ -123,4 +130,9 @@ function placeSymbol(cell) {
 
 function isBoardFull() {
     return cells.every((cell) => cell.dataset.symbol);
+}
+
+function displayMessage(message) {
+    messageDisplay.innerText = message
+    console.log(message)
 }

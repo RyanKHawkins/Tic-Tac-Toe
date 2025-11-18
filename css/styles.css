@@ -41,7 +41,9 @@ main {
 h2 {
     text-align: center;
 }
-
+#player_selector {
+    background-color: var(--color4);
+}
 #board {
     border: 5px solid var(--color3);
     border-radius: 5%;
@@ -139,5 +141,9 @@ button {
     border: 2px solid var(--color3)
 }
 button:hover {
-    transform: scale(1.05)
+    transform: scale(1.05);
+    border-color: var(--color1);
+}
+button:active {
+    transform: scale(.95)
 }
