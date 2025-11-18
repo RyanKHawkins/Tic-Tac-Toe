@@ -82,15 +82,19 @@ function newGame() {
     if (winner) {
         currPlayer = player1 == winner ? player2 : player1
     }
+    resetCells();
+    startButton.classList.remove("alert-button");
+    messageDisplay.innerText = `Player:  ${currPlayer.symbol}`;
+    gameOver = false;
+    winner = "";
+}
+
+function resetCells() {
     cells.forEach((cell) => {
         cell.removeAttribute("data-symbol");
         cell.innerText = "";
         cell.classList = "cell";
     });
-    startButton.classList.remove("alert-button");
-    messageDisplay.innerText = `Player:  ${currPlayer.symbol}`;
-    gameOver = false;
-    winner = "";
 }
 
 function placeSymbol(cell) {
