@@ -98,11 +98,8 @@ function resetCells() {
 }
 
 function placeSymbol(cell) {
-    if (gameOver) {
-        return;
-    }
-    if (cell.dataset.symbol) {
-        return;
+    if (gameOver || cell.dataset.symbol) {
+        return
     }
     cell.dataset.symbol = currPlayer.symbol;
     cell.innerText = currPlayer.symbol;
