@@ -3,10 +3,14 @@ const message = document.getElementById("message");
 const startButton = document.querySelector("#start-button");
 startButton.addEventListener("click", newGame);
 const messageDisplay = document.querySelector("#message-display");
+const opponentSelector = document.querySelector("#player_selector")
 const h2 = document.querySelector("h2");
 h2.addEventListener("click", () => {
     return;
 });
+opponentSelector.addEventListener("change", () => {
+    newGame()
+})
 
 let player1 = { name: "Player 1", symbol: "X" };
 let player2 = { name: "Player 2", symbol: "O" };
