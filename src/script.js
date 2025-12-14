@@ -8,9 +8,9 @@ const h2 = document.querySelector("h2");
 h2.addEventListener("click", () => {
     return;
 });
-opponentSelector.addEventListener("change", () => {
-    newGame()
-})
+// opponentSelector.addEventListener("change", () => {
+//     newGame()
+// })
 
 document.querySelector("#board").addEventListener("click", () => {
     if (gameOver) {
